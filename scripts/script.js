@@ -51,11 +51,28 @@ function border() {
     }
 
     
+    var endRect = end.getBoundingClientRect();
+    var endLeft = endRect.left;
+    var endTop = endRect.top;
+    var endWidth = endRect.width;
+    var endHeight = endRect.height;
+
     
+    if (isMouseOverElement(mouseX, mouseY, endLeft, endTop, endWidth, endHeight) && startGame) {
+        statusDisplay.textContent = "Congratulations! You win!"; 
+        startGame = false; 
+    }
 }
 
 
+function isMouseOverElement(mouseX, mouseY, elementLeft, elementTop, elementWidth, elementHeight) {
+    var elementRight = elementLeft + elementWidth; 
+    var elementBottom = elementTop + elementHeight; 
 
+    
+    return mouseX >= elementLeft && mouseX <= elementRight &&
+           mouseY >= elementTop && mouseY <= elementBottom;
+}
 
 
 start.addEventListener('mouseover', Game); 
